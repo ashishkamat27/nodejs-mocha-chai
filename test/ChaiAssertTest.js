@@ -1,6 +1,9 @@
 var chai=require('chai');
 var assert=chai.assert;
-
+var calc=require("../src/calc");
+var obj = { val: 10 };
+var fn1 = function() { obj.val = 13 };
+var fn2=function() { obj.val=5};
 describe ("Chai Assertion", function (){
 	// 1 OK Not OK
 	describe ("#OK Not OK",function() {
@@ -54,16 +57,33 @@ describe ("Chai Assertion", function (){
                         assert.isBelow(3, 6, '3 is strictly less than 6');
                         done();
                 });
-		it("For Is Below",function(done){
+		it("For Increase",function(done){
 
-                        assert.isBelow(3, 6, '3 is strictly less than 6');
+                        assert.increases(fn1, obj, 'val')
+                        done();
+                });
+                it("For Decrease",function(done){
+
+                        assert.decreases(fn2, obj, 'val')
                         done();
                 });
 
 
 
         });
+          describe ("#For Type Of",function() {
+                it("Checking Type Of", function(done){
+		assert.typeOf({ tea: 'chai' }, 'object', 'we have an object');
+		assert.typeOf(calc,'object', 'we have object again');
+		assert.typeOf(['chai', 'jasmine'], 'array', 'we have an array');
+		assert.typeOf('tea', 'string', 'we have a string');
+		assert.typeOf(/tea/, 'regexp', 'we have a regular expression');
+		assert.typeOf(null, 'null', 'we have a null');
+		assert.typeOf(undefined, 'undefined', 'we have an undefined');
+                        done();
+                });
+               
+                        
 
-
+	});
 })
-
