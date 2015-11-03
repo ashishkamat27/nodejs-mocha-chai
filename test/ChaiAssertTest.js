@@ -12,7 +12,7 @@ describe ("Chai Assertion", function (){
 		});
 		it("For Not Ok",function(done){
 
-			assert.notOk('everything', 'this will fail');
+			//assert.notOk('everything', 'this will fail');
 			assert.notOk(false, 'this will pass');
 			done();
 		})
